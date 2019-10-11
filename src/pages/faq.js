@@ -1,9 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import Layout from '../layouts';
+import Layout from "../layouts";
 
-import { StyledSection } from '../layouts/elements';
+import { StyledSection } from "../layouts/elements";
 
 const Faq = () => (
   <StyledSection>

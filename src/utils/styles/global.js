@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
 
@@ -52,6 +52,7 @@ export default createGlobalStyle`
       --text-highlight: ${props => props.theme.colors.lightTheme.textHighlight};
       --background: ${props => props.theme.colors.lightTheme.background};
       --white: #fff;
+      --red: ${props => props.theme.colors.red};
       --shadow-btn: rgba(7, 49, 69, .1);
       --shadow-color: rgba(0, 0, 0, 0.1);
       --shadow-colorDark: rgba(0, 0, 0, 0.25);

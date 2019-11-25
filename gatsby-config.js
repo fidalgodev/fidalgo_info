@@ -3,28 +3,28 @@ module.exports = {
     title: `Fidalgo | Setup, FAQ, Course Recommendations and more...`,
     description: `Here you'll find all the information about my setup, everything about me, and also resource recommendations.`,
     author: `Fidalgo`,
-    siteUrl: 'https://fidalgodev.com',
+    siteUrl: "https://fidalgodev.com",
     social: {
-      twitter: 'fidalgodev',
-      instagram: 'fidalgodev',
-      linkedin: 'fidalgodev',
-      youtube: 'Fidalgodev',
-      facebook: 'fidalgodev',
-      github: 'fidalgodev',
-      email: 'hello@fidalgo.dev',
+      twitter: "fidalgodev",
+      instagram: "fidalgodev",
+      linkedin: "fidalgodev",
+      youtube: "Fidalgodev",
+      facebook: "fidalgodev",
+      github: "fidalgodev",
+      email: "hello@fidalgo.dev"
     },
     // name of the image for social website share, should be in static folder
-    imageShare: `share.jpg`,
+    imageShare: `share.jpg`
   },
   plugins: [
     `gatsby-plugin-layout`,
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: 'UA-141189217-1D',
+        trackingId: "UA-141189217-1D",
         // Defines where to place the tracking script - `true` in the head and `false` in the body
-        head: false,
-      },
+        head: false
+      }
     },
     `gatsby-plugin-use-dark-mode`,
     `gatsby-plugin-react-helmet`,
@@ -33,15 +33,15 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
-      },
+        path: `${__dirname}/src/images`
+      }
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `content`,
-        path: `${__dirname}/src/content`,
-      },
+        path: `${__dirname}/src/content`
+      }
     },
     {
       resolve: `gatsby-plugin-prefetch-google-fonts`,
@@ -49,10 +49,10 @@ module.exports = {
         fonts: [
           {
             family: `Montserrat`,
-            variants: [`200`, `400`, `400i`, `600`, `600i`, `700`],
-          },
-        ],
-      },
+            variants: [`200`, `400`, `400i`, `600`, `600i`, `700`]
+          }
+        ]
+      }
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
@@ -61,14 +61,14 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: 'gatsby-remark-external-links',
+            resolve: "gatsby-remark-external-links",
             options: {
-              target: '_blank',
-              rel: 'noreferrer',
-            },
-          },
-        ],
-      },
+              target: "_blank",
+              rel: "noreferrer"
+            }
+          }
+        ]
+      }
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -79,9 +79,9 @@ module.exports = {
         start_url: `/`,
         background_color: `#212121`,
         theme_color: `#127EB1`,
-        display: `minimal-ui`,
-      },
+        display: `minimal-ui`
+      }
     },
-    `gatsby-plugin-offline`,
-  ],
+    `gatsby-plugin-offline`
+  ]
 };

@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 import Img from "gatsby-image";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTimes, faQuestion } from "@fortawesome/free-solid-svg-icons";
 
 import { StyledSection } from "../layouts/elements";
 import Heading from "../components/UI/heading";
@@ -17,7 +20,7 @@ const StyledImg = styled(Img)`
   box-shadow: 0 2rem 3rem var(--shadow-colorDark);
 `;
 
-const IndicatorWrapper = styled.div`
+const IndicatorWrapper = styled.article`
   position: absolute;
   top: ${({ top }) => `${top}%`};
   left: ${({ left }) => `${left}%`};
@@ -27,22 +30,32 @@ const IndicatorWrapper = styled.div`
 `;
 
 const Indicator = styled.button`
-  width: 2rem;
-  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
   padding: 0;
   border-radius: 100%;
-  background-color: var(--white);
+  background-color: var(--background);
   border: none;
   cursor: pointer;
+  box-shadow: 0 2rem 3rem var(--shadow-colorDark);
+
+  & svg {
+    height: 100%;
+  }
 `;
 
 const Tooltip = styled.span`
-  visibility: hidden;
-  opacity: 0;
-  width: 120px;
-  font-size: 1.2rem;
-  background-color: var(--white);
-  color: var(--text);
+  visibility: ${({ opened }) => (opened ? "visible" : "hidden")};
+  opacity: ${({ opened }) => (opened ? 1 : 0)};
+  width: 14rem;
+  margin-left: -7rem;
+  font-weight: 600;
+  font-size: 1.3rem;
+  background-color: var(--background);
+  color: var(--text-highlight);
   text-align: center;
   border-radius: 6px;
   padding: 1rem;
@@ -50,8 +63,9 @@ const Tooltip = styled.span`
   z-index: 2;
   bottom: 140%;
   left: 50%;
-  margin-left: -60px;
-  transition: all 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+  transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out,
+    color 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s,
+    background-color 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
 
   &::after {
     content: "";
@@ -61,24 +75,65 @@ const Tooltip = styled.span`
     margin-left: -5px;
     border-width: 5px;
     border-style: solid;
-    transition: all 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
-    border-color: var(--white) transparent transparent transparent;
-  }
-
-  ${IndicatorWrapper}:hover & {
-    opacity: 1;
-    visibility: visible;
+    transition: border-color 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+    border-color: var(--background) transparent transparent transparent;
   }
 `;
 
-const ItemIndicator = ({ name, top, left }) => (
+const ItemIndicatorButton = styled.button`
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  color: var(--text);
+  font-weight: 500;
+  font-size: 1.5rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
+
+  & svg {
+    margin-right: 0.5rem;
+  }
+`;
+
+const ItemIndicatorImage = ({ name, top, left, onClick, selected }) => (
   <IndicatorWrapper left={left} top={top}>
-    <Indicator />
-    <Tooltip>{name}</Tooltip>
+    <Indicator onClick={onClick}>
+      {selected ? (
+        <FontAwesomeIcon
+          color="var(--text-highlight)"
+          size="1x"
+          icon={faTimes}
+        />
+      ) : (
+        <FontAwesomeIcon
+          color="var(--text-highlight)"
+          size="1x"
+          icon={faQuestion}
+        />
+      )}
+    </Indicator>
+    <Tooltip opened={selected}>{name}</Tooltip>
   </IndicatorWrapper>
 );
 
+const ItemIndicator = ({ onClick, selected, children }) => (
+  <ItemIndicatorButton onClick={onClick} selected={selected}>
+    {selected ? (
+      <FontAwesomeIcon color="var(--text-highlight)" size="1x" icon={faTimes} />
+    ) : (
+      <FontAwesomeIcon
+        color="var(--text-highlight)"
+        size="1x"
+        icon={faQuestion}
+      />
+    )}
+    {children}
+  </ItemIndicatorButton>
+);
+
 const IndexPage = () => {
+  // GRAPHQL Query
   const { homeSetup, homeItems, workItems } = useStaticQuery(graphql`
     query {
       homeSetup: file(relativePath: { eq: "setup_home.jpg" }) {
@@ -123,6 +178,18 @@ const IndexPage = () => {
     }
   `);
 
+  const [selectedTooltip, setSelectedTooltip] = useState(null);
+
+  console.log(selectedTooltip);
+
+  const handleTooltipClicked = tooltip => {
+    if (selectedTooltip === tooltip) {
+      setSelectedTooltip(null);
+      return;
+    }
+    setSelectedTooltip(tooltip);
+  };
+
   return (
     <StyledSection fullHeight>
       <Heading
@@ -133,9 +200,11 @@ const IndexPage = () => {
         <StyledImg fluid={homeSetup.childImageSharp.fluid} />
         {homeItems.childMarkdownRemark.frontmatter.items.map(
           ({ name, top, left }, i) => (
-            <ItemIndicator
+            <ItemIndicatorImage
               key={i}
               type="button"
+              onClick={() => handleTooltipClicked(i)}
+              selected={selectedTooltip === i}
               top={top}
               left={left}
               name={name}
@@ -143,6 +212,16 @@ const IndexPage = () => {
           )
         )}
       </ImageWrapper>
+      {homeItems.childMarkdownRemark.frontmatter.items.map(({ name }, i) => (
+        <ItemIndicator
+          key={i}
+          type="button"
+          onClick={() => handleTooltipClicked(i)}
+          selected={selectedTooltip === i}
+        >
+          {name}
+        </ItemIndicator>
+      ))}
     </StyledSection>
   );
 };

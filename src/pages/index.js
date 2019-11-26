@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Img from "gatsby-image";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faTimes, faQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faTimes, faQuestion } from "@fortawesome/free-solid-svg-icons";
 
 import { StyledSection } from "../layouts/elements";
 import Heading from "../components/UI/heading";
@@ -52,18 +52,18 @@ const Tooltip = styled.span`
   opacity: ${({ opened }) => (opened ? 1 : 0)};
   width: 14rem;
   margin-left: -7rem;
-  font-weight: 600;
-  font-size: 1.3rem;
-  background-color: var(--background);
-  color: var(--text-highlight);
-  text-align: center;
-  border-radius: 6px;
-  padding: 1rem;
   position: absolute;
   z-index: 2;
   bottom: 140%;
   left: 50%;
-  transition: opacity 200ms ease-in-out, visibility 200ms ease-in-out,
+  background-color: var(--background);
+  color: var(--text-highlight);
+  font-weight: 600;
+  font-size: 1.3rem;
+  text-align: center;
+  border-radius: 6px;
+  padding: 1rem;
+  transition: opacity 200ms ease-in-out,
     color 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s,
     background-color 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
 

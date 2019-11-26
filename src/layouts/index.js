@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "styled-components";
 import styled from "styled-components";
 import { useTransition } from "react-spring";
-import { throttle } from "lodash";
+import throttle from "lodash/throttle";
 
 import GlobalStyles from "../utils/styles/global";
 import theme from "../utils/styles/theme";
@@ -29,17 +29,16 @@ const StyledMain = styled.main`
 `;
 
 const Layout = ({ children }) => {
-  // State to show or hide scroll to top component, gets trigged based on the scroll link component
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   // When scroll updates, check if scroll to top should be shown or not
-  const scrollUpdated = () => {
-    if (window.pageYOffset > (window.innerHeight / 4) * 3)
+  const scrollUpdated = useCallback(() => {
+    if (window.pageYOffset > (window.innerHeight / 4) * 3) {
       setShowScrollTop(true);
-    else {
+    } else {
       setShowScrollTop(false);
     }
-  };
+  }, []);
 
   // Throttled function
   const scrollUpdatedThrottle = throttle(scrollUpdated, 500);
@@ -71,8 +70,6 @@ const Layout = ({ children }) => {
   // Run the function to change the VH variable when the browser is resized
   useEffect(() => {
     changeVhVariable();
-    // window.addEventListener('resize', changeVhVariable);
-    // return () => window.removeEventListener('resize', changeVhVariable);
   }, []);
 
   return (

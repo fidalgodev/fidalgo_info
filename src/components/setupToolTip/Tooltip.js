@@ -1,46 +1,24 @@
-// import React from "react";
-// import TooltipTrigger from "react-popper-tooltip";
+import React from "react";
+import Tooltip from "react-tooltip-lite";
 
-// const Tooltip = ({ children, tooltip, hideArrow, ...props }) => (
-//   <TooltipTrigger
-//     {...props}
-//     tooltip={({
-//       arrowRef,
-//       tooltipRef,
-//       getArrowProps,
-//       getTooltipProps,
-//       placement
-//     }) => (
-//       <div
-//         {...getTooltipProps({
-//           ref: tooltipRef,
-//           className: "tooltip-container"
-//         })}
-//       >
-//         {!hideArrow && (
-//           <div
-//             {...getArrowProps({
-//               ref: arrowRef,
-//               className: "tooltip-arrow",
-//               "data-placement": placement
-//             })}
-//           />
-//         )}
-//         {tooltip}
-//       </div>
-//     )}
-//   >
-//     {({ getTriggerProps, triggerRef }) => (
-//       <span
-//         {...getTriggerProps({
-//           ref: triggerRef,
-//           className: "trigger"
-//         })}
-//       >
-//         {children}
-//       </span>
-//     )}
-//   </TooltipTrigger>
-// );
+const SetupTooltip = ({ id, isOpened, anchor, children }) => {
+  const propsToAnchor = {
+    "aria-controls": id,
+    "aria-labelledby": id,
+    role: "tooltip"
+  };
 
-// export default Tooltip;
+  return (
+    <Tooltip
+      isOpen={isOpened}
+      tagName="span"
+      direction="down"
+      // forceDirection
+      content={<div style={{ backgroundColor: "red" }}>{children}</div>}
+    >
+      {React.cloneElement(anchor, propsToAnchor)}
+    </Tooltip>
+  );
+};
+
+export default SetupTooltip;

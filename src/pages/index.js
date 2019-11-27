@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useStaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 import Img from "gatsby-image";
 
-import ReactTooltip from "react-tooltip";
+import SetupTooltip from "../components/setupToolTip/Tooltip";
+
+import useHandleClickOutsideRegions from "../components/utils/useHandleClickOutsideRegions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes, faQuestion } from "@fortawesome/free-solid-svg-icons";
@@ -140,34 +142,33 @@ const IndexPage = () => {
     }
   `);
 
-  const [selectedTooltips, setSelectedTooltips] = useState([]);
+  const [selectedTooltip, setSelectedTooltip] = useState();
+  const interestRegionRefs = useRef([]);
 
-  console.log(selectedTooltips);
+  // Create array of refs, we multiply by 2 because each item has a tooltip and a button and we want to store both refs on the array.
+  // When we render the tooltip + button we save a ref of each other on the interestRegionRefs
+  // Then the useHandleClickOutsideRegions will only run the action to close the tooltip if the click was outside the tooltip || button
+  useEffect(() => {
+    interestRegionRefs.current = [
+      ...Array(homeItems.childMarkdownRemark.frontmatter.items.length * 2)
+    ];
+  }, [homeItems.childMarkdownRemark.frontmatter.items]);
 
-  // const handleTooltipClicked = tooltip => {
-  //   console.log("tooltip clicked");
+  const handleTooltipBtnClicked = tooltip => {
+    // If tooltip button clicked is the same as already opened, close the tooltip
+    if (selectedTooltip === tooltip) {
+      setSelectedTooltip(null);
+      return;
+    }
+    // Otherwise open the respective one
+    setSelectedTooltip(tooltip);
+  };
 
-  //   if (selectedTooltip === tooltip) {
-  //     setSelectedTooltip(null);
-  //     return;
-  //   }
-  //   setSelectedTooltip(tooltip);
-  // };
-
-  const ItemIndicatorImage = ({ top, left, ...rest }) => (
-    <Indicator type="button" top={top} left={left} {...rest}>
-      <SvgWrapper>
-        <FontAwesomeIcon
-          color="var(--text-highlight)"
-          size="1x"
-          icon={faQuestion}
-        />
-      </SvgWrapper>
-    </Indicator>
+  // Hook to check clicks on the body, if click is outside button or tooltip it calls the function on the 1st argument
+  useHandleClickOutsideRegions(
+    () => setSelectedTooltip(null),
+    interestRegionRefs
   );
-
-  // const { name, description, link } =
-  //   homeItems.childMarkdownRemark.frontmatter.items[selectedTooltip] || {};
 
   return (
     <StyledSection fullHeight>
@@ -179,35 +180,25 @@ const IndexPage = () => {
         <StyledImg fluid={homeSetup.childImageSharp.fluid} />
         {homeItems.childMarkdownRemark.frontmatter.items.map(
           ({ top, left }, i) => (
-            <>
-              <ItemIndicatorImage
-                key={i}
-                top={top}
-                left={left}
-                data-id={i}
-                data-tip="custom show"
-                data-event="click"
-                data-for="homeSetup"
-              />
-            </>
+            <SetupTooltip
+              isOpened={selectedTooltip === i}
+              closeTooltip={() => setSelectedTooltip(null)}
+              key={i}
+              anchor={
+                <button
+                  ref={ref => (interestRegionRefs.current[i * 2] = ref)}
+                  onClick={() => handleTooltipBtnClicked(i)}
+                >
+                  {selectedTooltip === i ? "opened" : "closed"}
+                </button>
+              }
+            >
+              <p ref={ref => (interestRegionRefs.current[i * 2 + 1] = ref)}>
+                {top}
+              </p>
+            </SetupTooltip>
           )
         )}
-        <ReactTooltip
-          place="bottom"
-          effect="solid"
-          id="homeSetup"
-          clickable={true}
-          afterShow={e => {
-            const itemId = e.target.closest("button").getAttribute("data-id");
-            console.log(itemId);
-
-            // setSelectedTooltips(prevState => [...prevState, itemId]);
-          }}
-          afterHide={e => {
-            console.log(e);
-          }}
-          globalEventOff="click"
-        />
       </ImageWrapper>
     </StyledSection>
   );

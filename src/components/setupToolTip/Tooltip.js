@@ -1,6 +1,8 @@
 import React from 'react';
 import Tooltip from 'react-tooltip-lite';
 
+import useWidthChanged from './useWidthChanged';
+
 const SetupTooltip = ({ id, isOpened, anchor, children }) => {
   const propsToAnchor = {
     'aria-controls': id,
@@ -8,13 +10,21 @@ const SetupTooltip = ({ id, isOpened, anchor, children }) => {
     role: 'tooltip'
   };
 
+  const width = useWidthChanged();
+
   return (
     <Tooltip
+      key={width}
       isOpen={isOpened}
-      tagName="span"
+      tagName="div"
+      className="tooltipInnerWrapper"
+      tipContentClassName="tooltipContent"
+      background="var(--tooltipBackground)"
       direction="down"
-      // forceDirection
-      content={<div style={{ backgroundColor: 'red' }}>{children}</div>}
+      arrowSize={7}
+      distance={10}
+      padding="0"
+      content={children}
     >
       {React.cloneElement(anchor, propsToAnchor)}
     </Tooltip>

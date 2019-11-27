@@ -7,7 +7,7 @@ import SetupTooltip from '../components/setupToolTip/Tooltip';
 import useHandleClickOutsideRegions from '../components/utils/useHandleClickOutsideRegions';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes, faQuestion } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { StyledSection } from '../layouts/elements';
 import Heading from '../components/UI/heading';
@@ -15,32 +15,12 @@ import Heading from '../components/UI/heading';
 const ImageWrapper = styled.div`
   width: 100%;
   position: relative;
+  margin-bottom: 3rem;
 `;
 
 const StyledImg = styled(Img)`
   border-radius: 2px;
   box-shadow: 0 2rem 3rem var(--shadow-colorDark);
-`;
-
-const Indicator = styled.button`
-  position: absolute;
-  left: ${({ left }) => `${left}%`};
-  top: ${({ top }) => `${top}%`};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0;
-  border-radius: 100%;
-  background-color: var(--background);
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 2rem 3rem var(--shadow-colorDark);
-
-  & svg {
-    height: 100%;
-  }
 `;
 
 const ItemInfo = styled.div`
@@ -63,32 +43,75 @@ const ItemInfo = styled.div`
     transform 200ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
 `;
 
-const ItemInfoWrapper = styled.section`
-  position: relative;
-  padding: 2rem 2rem;
-  color: var(--text-highlight);
-  text-align: left;
+// Tooltip button and wrappers
+const TooltipWrapper = styled.article`
+  position: absolute;
+  left: ${({ left }) => `${left}%`};
+  top: ${({ top }) => `${top}%`};
+  z-index: ${({ selected }) => (selected ? '1' : '0')};
 
-  & h1 {
-    color: var(--primary-light);
-    font-weight: 500;
-    font-size: 2rem;
-    margin: 0;
-    margin-top: 1rem;
-  }
-
-  & p {
-    font-size: 1.5rem;
-    font-weight: 600;
+  & .tooltipInnerWrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
   }
 `;
 
-const SvgWrapper = styled.span`
-  width: 2rem;
-  height: 2rem;
+const Indicator = styled.button`
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100%;
+  background-color: var(--background);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2rem 3rem var(--shadow-colorDark);
+  transition: background-color 200ms cubic-bezier(0.645, 0.045, 0.355, 1) & svg {
+    height: 100%;
+  }
+`;
+
+const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
+  transition: transform 200ms cubic-bezier(0.645, 0.045, 0.355, 1),
+    color 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+
+  &.opened {
+    transform: rotate(135deg);
+  }
+`;
+
+const Article = styled.article`
+  color: var(--text);
+  max-width: 40rem;
+  padding: 2rem;
+  box-shadow: 0 2rem 3rem var(--shadow-color);
+`;
+
+const ItemTitle = styled.h1`
+  color: var(--primary-light);
+  font-weight: 500;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+`;
+
+const ItemDescription = styled.p`
+  font-weight: 600;
+  font-size: 1.7rem;
+  margin-bottom: 1.25rem;
+  color: var(--text-highlight);
+`;
+
+const ItemLink = styled.p`
+  color: var(--text-highlight);
+  font-weight: 800;
+  font-size: 1.5rem;
+
+  & a {
+    color: var(--primary);
+  }
 `;
 
 const IndexPage = () => {
@@ -97,7 +120,7 @@ const IndexPage = () => {
     query {
       homeSetup: file(relativePath: { eq: "setup_home.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 1250, quality: 80) {
+          fluid(maxWidth: 2000, quality: 95) {
             ...GatsbyImageSharpFluid_tracedSVG
           }
         }
@@ -178,24 +201,52 @@ const IndexPage = () => {
       <ImageWrapper>
         <StyledImg fluid={homeSetup.childImageSharp.fluid} />
         {homeItems.childMarkdownRemark.frontmatter.items.map(
-          ({ top, left }, i) => (
-            <SetupTooltip
-              isOpened={selectedTooltip === i}
-              closeTooltip={() => setSelectedTooltip(null)}
+          ({ name, description, link, top, left }, i) => (
+            <TooltipWrapper
+              selected={selectedTooltip === i}
               key={i}
-              anchor={
-                <button
-                  ref={ref => (interestRegionRefs.current[i * 2] = ref)}
-                  onClick={() => handleTooltipBtnClicked(i)}
-                >
-                  {selectedTooltip === i ? 'opened' : 'closed'}
-                </button>
-              }
+              top={top}
+              left={left}
             >
-              <p ref={ref => (interestRegionRefs.current[i * 2 + 1] = ref)}>
-                {top}
-              </p>
-            </SetupTooltip>
+              <SetupTooltip
+                isOpened={selectedTooltip === i}
+                closeTooltip={() => setSelectedTooltip(null)}
+                anchor={
+                  <Indicator
+                    ref={ref => (interestRegionRefs.current[i * 2] = ref)}
+                    onClick={() => handleTooltipBtnClicked(i)}
+                  >
+                    {selectedTooltip === i ? (
+                      <StyledFontAwesomeIcon
+                        icon={faPlus}
+                        size="1x"
+                        color="var(--red)"
+                        className="opened"
+                      />
+                    ) : (
+                      <StyledFontAwesomeIcon
+                        icon={faPlus}
+                        size="1x"
+                        color="var(--text-highlight)"
+                      />
+                    )}
+                  </Indicator>
+                }
+              >
+                <Article
+                  ref={ref => (interestRegionRefs.current[i * 2 + 1] = ref)}
+                >
+                  <ItemTitle>{name}</ItemTitle>
+                  <ItemDescription>{description}</ItemDescription>
+                  <ItemLink>
+                    Get it{' '}
+                    <a href={link} target="_blank" rel="noopener noreferrer">
+                      here
+                    </a>
+                  </ItemLink>
+                </Article>
+              </SetupTooltip>
+            </TooltipWrapper>
           )
         )}
       </ImageWrapper>

@@ -1,7 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-
     html {
       font-size: 62.5%; //1rem = 10px
       box-sizing: border-box;
@@ -21,7 +20,7 @@ export default createGlobalStyle`
     }
 
     * {
-      /* outline: none; */
+      outline: none;
       box-sizing: inherit;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
     }
@@ -32,6 +31,8 @@ export default createGlobalStyle`
       box-sizing: inherit;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      margin: 0;
+      padding: 0;
     }
 
     ::selection {
@@ -51,6 +52,8 @@ export default createGlobalStyle`
       --text: ${props => props.theme.colors.lightTheme.text};
       --text-highlight: ${props => props.theme.colors.lightTheme.textHighlight};
       --background: ${props => props.theme.colors.lightTheme.background};
+      --tooltipBackground: ${props =>
+        props.theme.colors.lightTheme.tooltipBackground};
       --white: #fff;
       --red: ${props => props.theme.colors.red};
       --shadow-btn: rgba(7, 49, 69, .1);
@@ -63,6 +66,8 @@ export default createGlobalStyle`
       --text: ${props => props.theme.colors.lightTheme.text};
       --text-highlight: ${props => props.theme.colors.lightTheme.textHighlight};
       --background: ${props => props.theme.colors.lightTheme.background};
+      --tooltipBackground: ${props =>
+        props.theme.colors.lightTheme.tooltipBackground};
       }
 
       &.dark-mode {
@@ -71,6 +76,8 @@ export default createGlobalStyle`
         --text-highlight: ${props =>
           props.theme.colors.darkTheme.textHighlight};
         --background: ${props => props.theme.colors.darkTheme.background};
+        --tooltipBackground: ${props =>
+          props.theme.colors.darkTheme.tooltipBackground};
       }
     }
 
@@ -81,5 +88,11 @@ export default createGlobalStyle`
     select,
     a {
       -webkit-tap-highlight-color: rgba(0,0,0,0);
+    }
+
+    .tooltipContent {
+      & .react-tooltip-lite {
+        border-radius: 0.5rem;
+      }
     }
 `;

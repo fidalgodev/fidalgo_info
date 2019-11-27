@@ -3,7 +3,7 @@ items:
   [
     {
       name: 'Vortex TAB75',
-      description: 'Vortex Tab75 with Cherry MX Brown Switches.',
+      description: "Vortex Tab75 with Cherry MX Brown Switches. I've been using this keyboard for 4 months and love it so much!",
       link: 'https://www.google.com',
       top: '80',
       left: '10',

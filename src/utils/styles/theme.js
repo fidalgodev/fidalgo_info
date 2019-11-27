@@ -1,28 +1,30 @@
 const theme = {
   colors: {
-    main: "#127EB1",
-    light: "#089ECA",
-    lighter: "#36A6BA",
+    main: '#127EB1',
+    light: '#089ECA',
+    lighter: '#36A6BA',
     lightTheme: {
-      text: "#575757",
-      textHighlight: "#333",
-      background: "#fff"
+      text: '#575757',
+      textHighlight: '#333',
+      background: '#fff',
+      tooltipBackground: '#f7f7f7'
     },
     darkTheme: {
-      text: "#dadada",
-      textHighlight: "#F0F0F0",
-      background: "#212121"
+      text: '#dadada',
+      textHighlight: '#F0F0F0',
+      background: '#212121',
+      tooltipBackground: '#1a1a1a'
     },
-    red: "#E15A60"
+    red: '#E15A60'
   },
   mediaQueries: {
     smallest: `only screen and (max-width: 25em)`,
-    smaller: "only screen and (max-width: 31.25em)",
-    small: "only screen and (max-width: 37.5em)",
-    medium: "only screen and (max-width: 56.25em)",
-    large: "only screen and (max-width: 80em)",
-    larger: "only screen and (max-width: 90em)",
-    largest: "only screen and (max-width: 97em)"
+    smaller: 'only screen and (max-width: 31.25em)',
+    small: 'only screen and (max-width: 37.5em)',
+    medium: 'only screen and (max-width: 56.25em)',
+    large: 'only screen and (max-width: 80em)',
+    larger: 'only screen and (max-width: 90em)',
+    largest: 'only screen and (max-width: 97em)'
   }
 };
 

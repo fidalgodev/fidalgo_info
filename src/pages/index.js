@@ -1,17 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useStaticQuery, graphql } from "gatsby";
-import styled from "styled-components";
-import Img from "gatsby-image";
+import React, { useState, useRef, useEffect } from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
+import styled from 'styled-components';
+import Img from 'gatsby-image';
 
-import SetupTooltip from "../components/setupToolTip/Tooltip";
+import SetupTooltip from '../components/setupToolTip/Tooltip';
+import useHandleClickOutsideRegions from '../components/utils/useHandleClickOutsideRegions';
 
-import useHandleClickOutsideRegions from "../components/utils/useHandleClickOutsideRegions";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes, faQuestion } from '@fortawesome/free-solid-svg-icons';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes, faQuestion } from "@fortawesome/free-solid-svg-icons";
-
-import { StyledSection } from "../layouts/elements";
-import Heading from "../components/UI/heading";
+import { StyledSection } from '../layouts/elements';
+import Heading from '../components/UI/heading';
 
 const ImageWrapper = styled.div`
   width: 100%;
@@ -45,13 +44,13 @@ const Indicator = styled.button`
 `;
 
 const ItemInfo = styled.div`
-  visibility: ${({ opened }) => (opened ? "visible" : "hidden")};
+  visibility: ${({ opened }) => (opened ? 'visible' : 'hidden')};
   opacity: ${({ opened }) => (opened ? 1 : 0)};
   position: absolute;
   top: 50%;
   left: 50%;
   transform: ${({ opened }) =>
-    opened ? " translate(-50%, -50%)" : " translate(-50%, -80%)"};
+    opened ? ' translate(-50%, -50%)' : ' translate(-50%, -80%)'};
   width: 100%;
   max-width: 40rem;
   z-index: 2;
@@ -189,7 +188,7 @@ const IndexPage = () => {
                   ref={ref => (interestRegionRefs.current[i * 2] = ref)}
                   onClick={() => handleTooltipBtnClicked(i)}
                 >
-                  {selectedTooltip === i ? "opened" : "closed"}
+                  {selectedTooltip === i ? 'opened' : 'closed'}
                 </button>
               }
             >

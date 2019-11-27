@@ -1,11 +1,11 @@
-import React from "react";
-import Tooltip from "react-tooltip-lite";
+import React from 'react';
+import Tooltip from 'react-tooltip-lite';
 
 const SetupTooltip = ({ id, isOpened, anchor, children }) => {
   const propsToAnchor = {
-    "aria-controls": id,
-    "aria-labelledby": id,
-    role: "tooltip"
+    'aria-controls': id,
+    'aria-labelledby': id,
+    role: 'tooltip'
   };
 
   return (
@@ -14,7 +14,7 @@ const SetupTooltip = ({ id, isOpened, anchor, children }) => {
       tagName="span"
       direction="down"
       // forceDirection
-      content={<div style={{ backgroundColor: "red" }}>{children}</div>}
+      content={<div style={{ backgroundColor: 'red' }}>{children}</div>}
     >
       {React.cloneElement(anchor, propsToAnchor)}
     </Tooltip>

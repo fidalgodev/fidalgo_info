@@ -1,16 +1,16 @@
-import React, { useState, useEffect, useCallback } from "react";
-import PropTypes from "prop-types";
-import { ThemeProvider } from "styled-components";
-import styled from "styled-components";
-import { useTransition } from "react-spring";
-import throttle from "lodash/throttle";
+import React, { useState, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
+import { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
+import { useTransition } from 'react-spring';
+import throttle from 'lodash/throttle';
 
-import GlobalStyles from "../utils/styles/global";
-import theme from "../utils/styles/theme";
-import SEO from "../components/utils/seo";
+import GlobalStyles from '../utils/styles/global';
+import theme from '../utils/styles/theme';
+import SEO from '../components/utils/seo';
 
-import Navbar from "../components/navigation/navbar";
-import ScrollToTop from "../components/UI/scrollToTop";
+import Navbar from '../components/navigation/navbar';
+import ScrollToTop from '../components/UI/scrollToTop';
 
 const Wrapper = styled.div`
   display: flex;
@@ -44,10 +44,10 @@ const Layout = ({ children }) => {
   const scrollUpdatedThrottle = throttle(scrollUpdated, 500);
 
   useEffect(() => {
-    window.addEventListener("scroll", scrollUpdatedThrottle);
+    window.addEventListener('scroll', scrollUpdatedThrottle);
 
     return () => {
-      window.removeEventListener("scroll", scrollUpdatedThrottle);
+      window.removeEventListener('scroll', scrollUpdatedThrottle);
     };
   }, []);
 
@@ -61,10 +61,10 @@ const Layout = ({ children }) => {
   // FIX FOR VH ON MOBILE
   const changeVhVariable = () => {
     // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
-    const vh = typeof window !== "undefined" && window.innerHeight * 0.01;
+    const vh = typeof window !== 'undefined' && window.innerHeight * 0.01;
     // Then we set the value in the --vh custom property to the root of the document
-    typeof document !== "undefined" &&
-      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    typeof document !== 'undefined' &&
+      document.documentElement.style.setProperty('--vh', `${vh}px`);
   };
 
   // Run the function to change the VH variable when the browser is resized

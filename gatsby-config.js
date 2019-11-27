@@ -3,15 +3,15 @@ module.exports = {
     title: `Fidalgo | Setup, FAQ, Course Recommendations and more...`,
     description: `Here you'll find all the information about my setup, everything about me, and also resource recommendations.`,
     author: `Fidalgo`,
-    siteUrl: "https://fidalgodev.com",
+    siteUrl: 'https://fidalgodev.com',
     social: {
-      twitter: "fidalgodev",
-      instagram: "fidalgodev",
-      linkedin: "fidalgodev",
-      youtube: "Fidalgodev",
-      facebook: "fidalgodev",
-      github: "fidalgodev",
-      email: "hello@fidalgo.dev"
+      twitter: 'fidalgodev',
+      instagram: 'fidalgodev',
+      linkedin: 'fidalgodev',
+      youtube: 'Fidalgodev',
+      facebook: 'fidalgodev',
+      github: 'fidalgodev',
+      email: 'hello@fidalgo.dev'
     },
     // name of the image for social website share, should be in static folder
     imageShare: `share.jpg`
@@ -21,7 +21,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-141189217-1D",
+        trackingId: 'UA-141189217-1D',
         // Defines where to place the tracking script - `true` in the head and `false` in the body
         head: false
       }
@@ -61,10 +61,10 @@ module.exports = {
       options: {
         plugins: [
           {
-            resolve: "gatsby-remark-external-links",
+            resolve: 'gatsby-remark-external-links',
             options: {
-              target: "_blank",
-              rel: "noreferrer"
+              target: '_blank',
+              rel: 'noreferrer'
             }
           }
         ]

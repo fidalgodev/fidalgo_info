@@ -41,8 +41,8 @@ const ScrollDown = () => {
     transform: 'translate(-50%, 0px)',
     from: {
       opacity: 0,
-      transform: 'translate(-50%, 40px)',
-    },
+      transform: 'translate(-50%, 40px)'
+    }
   });
   return (
     <ScrollDownWrapper style={ScrollDownSpring}>

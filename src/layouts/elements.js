@@ -7,62 +7,36 @@ const Section = styled.section`
   position: relative;
   flex-direction: column;
   justify-content: center;
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
+  flex: 1;
   width: 100%;
-  min-height: ${({ fullHeight }) =>
-    fullHeight
-      ? '100vh'
-      : 'auto'}; /* Fallback for browsers that do not support Custom Properties */
-  min-height: ${({ fullHeight }) =>
-    fullHeight
-      ? 'calc(var(--vh, 1vh) * 100)'
-      : 'auto'}; /* Fallback for browsers that do not support Custom Properties */
-  /* height: ${({ fullHeight }) =>
-    fullHeight ? 'calc(var(--vh, 1vh) * 100)' : '100%'}; */
-  /* min-height: ${({ fullHeight }) => (fullHeight ? '100vh' : '100%')}; */
 `;
 
-export const StyledSection = ({ children }) => (
-  <Section>
-    <Contained>
-      <Wrapper>{children}</Wrapper>
-    </Contained>
-  </Section>
-);
-
-export const Contained = styled.div`
+const Wrapper = styled.div`
   max-width: 124rem;
-  z-index: 2;
-  padding: 0 4rem;
-  margin: 0 auto;
   width: 100%;
-
-  @media ${props => props.theme.mediaQueries.small} {
-    padding: 0 3rem;
-  }
-
-  @media ${props => props.theme.mediaQueries.smaller} {
-    padding: 0 2rem;
-  }
-`;
-
-export const Wrapper = styled.div`
-  padding: 6rem 0rem;
-  margin-top: 7rem;
+  padding: 6rem 4rem;
+  margin: 7rem auto 0 auto;
+  flex: 1;
   color: var(--text);
   display: flex;
   width: 100%;
   align-items: center;
+  justify-content: ${({ center }) => (center ? 'center' : 'flex-start')};
   flex-direction: column;
   transition: color 0.2s ease-out;
 
   @media ${({ theme }) => theme.mediaQueries.small} {
     margin-top: 6rem;
-    padding: 4rem 0rem;
+    padding: 4rem 3rem;
   }
 
   @media ${({ theme }) => theme.mediaQueries.smaller} {
-    padding: 3rem 0rem;
+    padding: 3rem 2rem;
   }
 `;
+
+export const StyledSection = ({ center, children }) => (
+  <Section>
+    <Wrapper center={center}>{children}</Wrapper>
+  </Section>
+);

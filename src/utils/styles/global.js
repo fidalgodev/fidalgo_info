@@ -59,6 +59,7 @@ export default createGlobalStyle`
       --shadow-btn: rgba(7, 49, 69, .1);
       --shadow-color: rgba(0, 0, 0, 0.1);
       --shadow-colorDark: rgba(0, 0, 0, 0.25);
+      --shadow-colorDarker: rgba(0, 0, 0, 0.4);
       background-color: var(--background);
 
       &.light-mode {
@@ -93,6 +94,7 @@ export default createGlobalStyle`
     .tooltipContent {
       & .react-tooltip-lite {
         border-radius: 0.5rem;
+        box-shadow: 0 2rem 3rem var(--shadow-color);
       }
     }
 `;

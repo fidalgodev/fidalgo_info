@@ -51,7 +51,7 @@ const Svg = styled.img`
 `;
 
 const NotFoundPage = () => (
-  <StyledSection fullHeight>
+  <StyledSection fullHeight={true} center>
     <Heading
       title="Page not found"
       subtitle="<span>Uppps!</span> This page <span>doesn't</span> exist"

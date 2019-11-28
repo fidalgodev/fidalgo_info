@@ -1,14 +1,9 @@
 import styled from 'styled-components';
-import Img from 'gatsby-image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ImageWrapper = styled.div`
   width: 100%;
   position: relative;
   margin-bottom: 3rem;
-`;
-
-export const StyledImg = styled(Img)`
   border-radius: 2px;
   box-shadow: 0 2rem 3rem var(--shadow-colorDark);
 `;
@@ -39,22 +34,11 @@ export const Indicator = styled.button`
   border: none;
   cursor: pointer;
   box-shadow: 0 0.8rem 1.5rem var(--shadow-colorDark);
-  transition: background-color 200ms cubic-bezier(0.645, 0.045, 0.355, 1) & svg {
-    height: 100%;
-  }
+  transition: background-color 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
 
   @media ${props => props.theme.mediaQueries.small} {
     width: 2.5rem;
     height: 2.5rem;
-  }
-`;
-
-export const StyledFontAwesomeIcon = styled(FontAwesomeIcon)`
-  transition: transform 200ms cubic-bezier(0.645, 0.045, 0.355, 1),
-    color 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
-
-  &.opened {
-    transform: rotate(135deg);
   }
 `;
 

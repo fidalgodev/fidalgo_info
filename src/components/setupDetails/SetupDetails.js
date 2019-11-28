@@ -1,96 +1,115 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { useTransition, animated, config } from 'react-spring';
+import Img from 'gatsby-image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 
-import useHandleClickOutsideRegions from '../../components/utils/useHandleClickOutsideRegions';
 import SetupTooltip from './setupToolTip/Tooltip';
 
 // Styled components
 import * as Styled from './styledComponents';
 
+const ItemIndicator = React.forwardRef(
+  ({ selected, id, onClick, title }, ref) => {
+    // Animation
+    const itemIndicatorAnimation = useTransition(selected, null, {
+      from: { position: 'absolute', opacity: 0 },
+      enter: { opacity: 1 },
+      leave: { opacity: 0 },
+      config: config.gentle
+    });
+
+    return (
+      <Styled.Indicator
+        isOpened={selected}
+        aria-describedby={selected ? id : null}
+        title={title}
+        ref={ref}
+        onClick={onClick}
+      >
+        {itemIndicatorAnimation.map(({ item, key, props }) =>
+          item ? (
+            <animated.div key={key} style={props}>
+              <FontAwesomeIcon icon={faTimes} size="1x" color="var(--red)" />
+            </animated.div>
+          ) : (
+            <animated.div key={key} style={props}>
+              <FontAwesomeIcon
+                icon={faPlus}
+                size="1x"
+                color="var(--text-highlight)"
+              />
+            </animated.div>
+          )
+        )}
+      </Styled.Indicator>
+    );
+  }
+);
+
 const SetupDetails = ({ image, items }) => {
   const [selectedTooltip, setSelectedTooltip] = useState(null);
-  const interestRegionRefs = useRef([]);
 
-  // Create array of refs, we multiply by 2 because each item has a tooltip and a button and we want to store both refs on the array.
-  // When we render the tooltip + button we save a ref of each other on the interestRegionRefs
-  // Then the useHandleClickOutsideRegions will only run the action to close the tooltip if the click was outside the tooltip || button
+  // Ref to the current tooltip opened button
+  const buttonRef = useRef(null);
+
   useEffect(() => {
-    interestRegionRefs.current = [
-      ...Array(items.childMarkdownRemark.frontmatter.items.length * 2)
-    ];
-  }, [items.childMarkdownRemark.frontmatter.items]);
-
-  const handleTooltipBtnClicked = tooltip => {
-    // If tooltip button clicked is the same as already opened, close the tooltip
-    if (selectedTooltip === tooltip) {
-      setSelectedTooltip(null);
-      return;
-    }
-    // Otherwise open the respective one
-    setSelectedTooltip(tooltip);
-  };
-
-  // Hook to check clicks on the body, if click is outside button or tooltip it calls the function on the 1st argument
-  useHandleClickOutsideRegions(
-    () => setSelectedTooltip(null),
-    interestRegionRefs
-  );
+    buttonRef.current && buttonRef.current.focus();
+  }, [selectedTooltip]);
 
   return (
     <Styled.ImageWrapper>
-      <Styled.StyledImg fluid={image.childImageSharp.fluid} />
+      <Img fluid={image.childImageSharp.fluid} />
       {items.childMarkdownRemark.frontmatter.items.map(
-        ({ name, description, link, top, left }, i) => (
-          <Styled.TooltipWrapper
-            selected={selectedTooltip === i}
-            key={i}
-            top={top}
-            left={left}
-          >
-            <SetupTooltip
-              isOpened={selectedTooltip === i}
-              id={`${name}${i}`}
-              closeTooltip={() => setSelectedTooltip(null)}
-              anchor={
-                <Styled.Indicator
-                  isOpened={selectedTooltip === i}
-                  aria-describedby={`${name}${i}`}
-                  ref={ref => (interestRegionRefs.current[i * 2] = ref)}
-                  onClick={() => handleTooltipBtnClicked(i)}
-                >
-                  {selectedTooltip === i ? (
-                    <Styled.StyledFontAwesomeIcon
-                      icon={faPlus}
-                      size="1x"
-                      color="var(--red)"
-                      className="opened"
-                    />
-                  ) : (
-                    <Styled.StyledFontAwesomeIcon
-                      icon={faPlus}
-                      size="1x"
-                      color="var(--text-highlight)"
-                    />
-                  )}
-                </Styled.Indicator>
-              }
+        ({ name, description, link, top, left }, i) => {
+          return (
+            <Styled.TooltipWrapper
+              selected={selectedTooltip === i}
+              key={i}
+              top={top}
+              left={left}
             >
-              <Styled.Article
-                ref={ref => (interestRegionRefs.current[i * 2 + 1] = ref)}
-              >
-                <Styled.ItemTitle>{name}</Styled.ItemTitle>
-                <Styled.ItemDescription>{description}</Styled.ItemDescription>
-                <Styled.ItemLink>
-                  Get it{' '}
-                  <a href={link} target="_blank" rel="noopener noreferrer">
-                    {' '}
-                    here
-                  </a>
-                </Styled.ItemLink>
-              </Styled.Article>
-            </SetupTooltip>
-          </Styled.TooltipWrapper>
-        )
+              {selectedTooltip === i ? (
+                <SetupTooltip
+                  isOpened={true}
+                  id={`${name}${i}`}
+                  closeTooltip={() => setSelectedTooltip(null)}
+                  anchor={
+                    <ItemIndicator
+                      id={`${name}${i}`}
+                      ref={buttonRef}
+                      title={name}
+                      selected={selectedTooltip === i}
+                      onClick={() => setSelectedTooltip(null)}
+                    />
+                  }
+                >
+                  <Styled.Article>
+                    <Styled.ItemTitle>{name}</Styled.ItemTitle>
+                    <Styled.ItemDescription>
+                      {description}
+                    </Styled.ItemDescription>
+                    <Styled.ItemLink>
+                      Get it{' '}
+                      <a href={link} target="_blank" rel="noopener noreferrer">
+                        {' '}
+                        here
+                      </a>
+                    </Styled.ItemLink>
+                  </Styled.Article>
+                </SetupTooltip>
+              ) : (
+                <ItemIndicator
+                  id={`${name}${i}`}
+                  title={name}
+                  ref={buttonRef}
+                  selected={selectedTooltip === i}
+                  onClick={() => setSelectedTooltip(i)}
+                />
+              )}
+            </Styled.TooltipWrapper>
+          );
+        }
       )}
     </Styled.ImageWrapper>
   );

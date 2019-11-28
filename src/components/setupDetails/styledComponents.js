@@ -72,17 +72,17 @@ export const ItemTitle = styled.h1`
   color: var(--primary);
   font-weight: 700;
   font-size: 1.9rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 
   @media ${props => props.theme.mediaQueries.small} {
     font-size: 1.8rem;
-    margin-top: 0.75rem;
   }
 `;
 
 export const ItemDescription = styled.p`
   font-weight: 500;
   font-size: 1.6rem;
+  line-height: 1.5;
   margin-top: 2rem;
   color: var(--text-highlight);
 

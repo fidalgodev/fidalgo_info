@@ -98,8 +98,8 @@ const IndexPage = () => {
       />
       <SetupHeading>Home Setup</SetupHeading>
       <SetupDetails image={homeSetup} items={homeItems} />
-      <SetupHeading>Work Setup</SetupHeading>
-      <SetupDetails image={homeSetup} items={workItems} />
+      {/* <SetupHeading>Work Setup</SetupHeading>
+      <SetupDetails image={homeSetup} items={workItems} /> */}
     </StyledSection>
   );
 };

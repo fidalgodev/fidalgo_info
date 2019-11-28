@@ -49,9 +49,11 @@ const SetupDetails = ({ image, items }) => {
           >
             <SetupTooltip
               isOpened={selectedTooltip === i}
+              id={`${name}${i}`}
               closeTooltip={() => setSelectedTooltip(null)}
               anchor={
                 <Styled.Indicator
+                  isOpened={selectedTooltip === i}
                   aria-describedby={`${name}${i}`}
                   ref={ref => (interestRegionRefs.current[i * 2] = ref)}
                   onClick={() => handleTooltipBtnClicked(i)}
@@ -74,8 +76,6 @@ const SetupDetails = ({ image, items }) => {
               }
             >
               <Styled.Article
-                id={`${name}${i}`}
-                role="tooltip"
                 ref={ref => (interestRegionRefs.current[i * 2 + 1] = ref)}
               >
                 <Styled.ItemTitle>{name}</Styled.ItemTitle>
@@ -83,6 +83,7 @@ const SetupDetails = ({ image, items }) => {
                 <Styled.ItemLink>
                   Get it{' '}
                   <a href={link} target="_blank" rel="noopener noreferrer">
+                    {' '}
                     here
                   </a>
                 </Styled.ItemLink>

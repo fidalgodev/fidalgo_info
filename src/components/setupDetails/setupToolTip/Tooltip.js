@@ -4,7 +4,7 @@ import { useSpring, animated, config } from 'react-spring';
 
 import useWidthChanged from './useWidthChanged';
 
-const SetupTooltip = ({ isOpened, anchor, children }) => {
+const SetupTooltip = ({ id, isOpened, anchor, children }) => {
   const width = useWidthChanged();
 
   const tooltipAnimation = useSpring({
@@ -25,9 +25,18 @@ const SetupTooltip = ({ isOpened, anchor, children }) => {
       arrowSize={7}
       distance={10}
       padding="0"
-      content={<animated.div style={tooltipAnimation}>{children}</animated.div>}
+      content={
+        <animated.article
+          id={id}
+          role="tooltip"
+          aria-hidden={!isOpened}
+          style={tooltipAnimation}
+        >
+          {children}
+        </animated.article>
+      }
     >
-      {React.cloneElement(anchor)}
+      {anchor}
     </Tooltip>
   );
 };

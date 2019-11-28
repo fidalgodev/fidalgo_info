@@ -18,7 +18,6 @@ export const TooltipWrapper = styled.article`
   position: absolute;
   left: ${({ left }) => `${left}%`};
   top: ${({ top }) => `${top}%`};
-  z-index: ${({ selected }) => (selected ? '1' : '0')};
 
   & .tooltipInnerWrapper {
     display: flex;
@@ -29,6 +28,7 @@ export const TooltipWrapper = styled.article`
 
 export const Indicator = styled.button`
   display: flex;
+  z-index: ${({ isOpened }) => (isOpened ? '1' : '0')};
   justify-content: center;
   align-items: center;
   padding: 0;

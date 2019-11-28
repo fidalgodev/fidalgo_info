@@ -1,28 +1,22 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Tooltip from 'react-tooltip-lite';
 import { useSpring, animated, config } from 'react-spring';
 
-import useHandleClickOutsideRegion from '../../utils/useHandleClickOutsideRegion';
 import useWidthChanged from './useWidthChanged';
 
-const SetupTooltip = ({ id, isOpened, closeTooltip, anchor, children }) => {
-  const tooltipRef = useRef(null);
+const SetupTooltip = ({ id, isOpened, anchor, children }) => {
   const width = useWidthChanged();
 
-  // Hook to check clicks on the body, if click is outside button or tooltip it calls the function on the 1st argument
-  useHandleClickOutsideRegion(closeTooltip, tooltipRef);
-
-  // TODO: replace with transition
-  // const tooltipAnimation = useSpring({
-  //   opacity: isOpened ? '1' : '0',
-  //   transform: `translateY(${isOpened ? '0rem' : '2rem'})`,
-  //   config: config.gentle
-  // });
+  const tooltipAnimation = useSpring({
+    opacity: isOpened ? '1' : '0',
+    transform: `translateY(${isOpened ? '0rem' : '2rem'})`,
+    config: config.gentle
+  });
 
   return (
     <Tooltip
       key={`${width}`}
-      isOpen={true}
+      isOpen={isOpened}
       tagName="div"
       className="tooltipInnerWrapper"
       tipContentClassName="tooltipContent"
@@ -34,11 +28,10 @@ const SetupTooltip = ({ id, isOpened, closeTooltip, anchor, children }) => {
       content={
         <animated.article
           id={id}
-          ref={tooltipRef}
           role="tooltip"
           aria-live="polite"
-          aria-hidden={false}
-          // style={tooltipAnimation}
+          aria-hidden={!isOpened}
+          style={tooltipAnimation}
         >
           {children}
         </animated.article>

@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 
-function useClickOutsideRegion(closeTooltip, excludedRegionRef) {
+function useClickOutsideRegions(closeTooltip, excludedRegionRefs) {
   useEffect(() => {
-    const handleClick = e => {
-      const wasClickOutsideRef =
-        excludedRegionRef.current &&
-        !excludedRegionRef.current.contains(e.target);
+    const handleClick = event => {
+      const wasClickInsideSomeRef = excludedRegionRefs.current.some(node => {
+        if (!node) return false;
 
-      if (wasClickOutsideRef) {
+        return node.contains(event.target);
+      });
+
+      if (!wasClickInsideSomeRef) {
         closeTooltip();
       }
     };
@@ -16,7 +18,7 @@ function useClickOutsideRegion(closeTooltip, excludedRegionRef) {
     return () => {
       document.removeEventListener('click', handleClick);
     };
-  }, [closeTooltip, excludedRegionRef]);
+  }, [closeTooltip, excludedRegionRefs]);
 }
 
-export default useClickOutsideRegion;
+export default useClickOutsideRegions;

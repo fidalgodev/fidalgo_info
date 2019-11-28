@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ImageWrapper = styled.div`
   width: 100%;
@@ -42,8 +43,12 @@ export const Indicator = styled.button`
   }
 `;
 
-export const Article = styled.article`
-  color: var(--text);
+export const StatusIcon = styled(FontAwesomeIcon)`
+  transform: ${({ opened }) => (opened ? 'rotate(135deg)' : '')};
+  transition: transform 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
+`;
+
+export const TooltipContentWrapper = styled.div`
   max-width: 40rem;
   padding: 2.5rem;
 

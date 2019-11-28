@@ -1,117 +1,91 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { useTransition, animated, config } from 'react-spring';
 import Img from 'gatsby-image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
+import useHandleClickOutsideRegion from '../utils/useHandleClickOutsideRegion';
 import SetupTooltip from './setupToolTip/Tooltip';
+// import ItemIndicator from './itemIndicator/ItemIndicator';
+import { Indicator, StatusIcon } from './styledComponents';
 
 // Styled components
-import * as Styled from './styledComponents';
-
-const ItemIndicator = React.forwardRef(
-  ({ selected, id, onClick, title }, ref) => {
-    // Animation
-    const itemIndicatorAnimation = useTransition(selected, null, {
-      from: { position: 'absolute', opacity: 0 },
-      enter: { opacity: 1 },
-      leave: { opacity: 0 },
-      config: config.gentle
-    });
-
-    return (
-      <Styled.Indicator
-        isOpened={selected}
-        aria-describedby={selected ? id : null}
-        title={title}
-        ref={ref}
-        onClick={onClick}
-      >
-        {itemIndicatorAnimation.map(({ item, key, props }) =>
-          item ? (
-            <animated.div key={key} style={props}>
-              <FontAwesomeIcon icon={faTimes} size="1x" color="var(--red)" />
-            </animated.div>
-          ) : (
-            <animated.div key={key} style={props}>
-              <FontAwesomeIcon
-                icon={faPlus}
-                size="1x"
-                color="var(--text-highlight)"
-              />
-            </animated.div>
-          )
-        )}
-      </Styled.Indicator>
-    );
-  }
-);
+import {
+  ImageWrapper,
+  TooltipWrapper,
+  TooltipContentWrapper,
+  ItemTitle,
+  ItemDescription,
+  ItemLink
+} from './styledComponents';
 
 const SetupDetails = ({ image, items }) => {
   const [selectedTooltip, setSelectedTooltip] = useState(null);
+  const tooltipRefs = useRef([]);
 
-  // Ref to the current tooltip opened button
-  const buttonRef = useRef(null);
+  // Hook to check clicks on the body, if click is outside button or tooltip it calls the function on the 1st argument
+  useHandleClickOutsideRegion(() => setSelectedTooltip(null), tooltipRefs);
+
+  const handleTooltipClick = tooltip => {
+    if (tooltip === selectedTooltip) {
+      setSelectedTooltip(null);
+      return;
+    }
+    setSelectedTooltip(tooltip);
+  };
 
   useEffect(() => {
-    buttonRef.current && buttonRef.current.focus();
-  }, [selectedTooltip]);
+    tooltipRefs.current = [
+      ...Array(items.childMarkdownRemark.frontmatter.items.length * 2)
+    ];
+  }, [items.childMarkdownRemark.frontmatter.items]);
 
   return (
-    <Styled.ImageWrapper>
+    <ImageWrapper>
       <Img fluid={image.childImageSharp.fluid} />
       {items.childMarkdownRemark.frontmatter.items.map(
         ({ name, description, link, top, left }, i) => {
+          const opened = selectedTooltip === i;
+
           return (
-            <Styled.TooltipWrapper
-              selected={selectedTooltip === i}
-              key={i}
-              top={top}
-              left={left}
-            >
-              {selectedTooltip === i ? (
-                <SetupTooltip
-                  isOpened={true}
-                  id={`${name}${i}`}
-                  closeTooltip={() => setSelectedTooltip(null)}
-                  anchor={
-                    <ItemIndicator
-                      id={`${name}${i}`}
-                      ref={buttonRef}
-                      title={name}
-                      selected={selectedTooltip === i}
-                      onClick={() => setSelectedTooltip(null)}
+            <TooltipWrapper selected={opened} key={i} top={top} left={left}>
+              <SetupTooltip
+                isOpened={opened}
+                id={`${name}${i}`}
+                closeTooltip={() => setSelectedTooltip(null)}
+                anchor={
+                  <Indicator
+                    aria-describedby={`${name}${i}`}
+                    title={name}
+                    ref={ref => (tooltipRefs.current[i * 2] = ref)}
+                    onClick={() => handleTooltipClick(i)}
+                  >
+                    <StatusIcon
+                      icon={faPlus}
+                      size="1x"
+                      opened={opened}
+                      color={opened ? 'var(--red)' : 'var(--text-highlight)'}
                     />
-                  }
+                  </Indicator>
+                }
+              >
+                <TooltipContentWrapper
+                  ref={ref => (tooltipRefs.current[i * 2 + 1] = ref)}
                 >
-                  <Styled.Article>
-                    <Styled.ItemTitle>{name}</Styled.ItemTitle>
-                    <Styled.ItemDescription>
-                      {description}
-                    </Styled.ItemDescription>
-                    <Styled.ItemLink>
-                      Get it{' '}
-                      <a href={link} target="_blank" rel="noopener noreferrer">
-                        {' '}
-                        here
-                      </a>
-                    </Styled.ItemLink>
-                  </Styled.Article>
-                </SetupTooltip>
-              ) : (
-                <ItemIndicator
-                  id={`${name}${i}`}
-                  title={name}
-                  ref={buttonRef}
-                  selected={selectedTooltip === i}
-                  onClick={() => setSelectedTooltip(i)}
-                />
-              )}
-            </Styled.TooltipWrapper>
+                  <ItemTitle>{name}</ItemTitle>
+                  <ItemDescription>{description}</ItemDescription>
+                  <ItemLink>
+                    Get it{' '}
+                    <a href={link} target="_blank" rel="noopener noreferrer">
+                      {' '}
+                      here
+                    </a>
+                  </ItemLink>
+                </TooltipContentWrapper>
+              </SetupTooltip>
+            </TooltipWrapper>
           );
         }
       )}
-    </Styled.ImageWrapper>
+    </ImageWrapper>
   );
 };
 

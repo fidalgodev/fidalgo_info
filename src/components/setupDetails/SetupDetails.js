@@ -61,7 +61,7 @@ const SetupDetails = ({ image, items }) => {
                     <StatusIcon
                       icon={faPlus}
                       size="1x"
-                      opened={opened}
+                      opened={opened ? 1 : 0}
                       color={opened ? 'var(--red)' : 'var(--text-highlight)'}
                     />
                   </Indicator>

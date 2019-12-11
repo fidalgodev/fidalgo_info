@@ -49,7 +49,7 @@ const Layout = ({ children }) => {
     return () => {
       window.removeEventListener('scroll', scrollUpdatedThrottle);
     };
-  }, []);
+  }, [scrollUpdatedThrottle]);
 
   // Animation
   const ScrollTopTransition = useTransition(showScrollTop, null, {
@@ -70,6 +70,10 @@ const Layout = ({ children }) => {
   // Run the function to change the VH variable when the browser is resized
   useEffect(() => {
     changeVhVariable();
+    window.addEventListener('resize', changeVhVariable);
+    return () => {
+      window.removeEventListener('scroll', changeVhVariable);
+    };
   }, []);
 
   return (

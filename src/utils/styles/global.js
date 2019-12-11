@@ -20,7 +20,7 @@ export default createGlobalStyle`
     }
 
     * {
-      /* outline: none; */
+      outline: none;
       box-sizing: inherit;
       -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
     }

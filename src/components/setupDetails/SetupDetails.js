@@ -4,7 +4,6 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import useHandleClickOutsideRegion from '../utils/useHandleClickOutsideRegion';
 import SetupTooltip from './setupToolTip/Tooltip';
-// import ItemIndicator from './itemIndicator/ItemIndicator';
 import { Indicator, StatusIcon } from './styledComponents';
 
 // Styled components

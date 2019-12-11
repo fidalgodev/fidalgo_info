@@ -91,7 +91,7 @@ const IndexPage = () => {
   `);
 
   return (
-    <StyledSection fullHeight>
+    <StyledSection>
       <Heading
         title="setup"
         subtitle="Here you'll find both my <span>work</span> and <span>home</span> setup <span>details</span>..."

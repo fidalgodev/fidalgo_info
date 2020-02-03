@@ -1,5 +1,4 @@
 import React from 'react';
-import { useSpring, animated } from 'react-spring';
 import {
   AccordionItem,
   AccordionItemHeading,

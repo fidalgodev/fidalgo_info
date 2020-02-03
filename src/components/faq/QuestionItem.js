@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSpring, animated } from 'react-spring';
 import {
   AccordionItem,
   AccordionItemHeading,
@@ -15,6 +16,7 @@ const StyledAccordionItem = styled(AccordionItem)`
   background-color: var(--tooltipBackground);
   border-radius: 0.5rem;
   box-shadow: 0 0.8rem 1.5rem var(--shadow-color);
+  transition: background-color 0.2s ease-in-out;
 
   &:not(:first-child) {
     margin-top: 3rem;
@@ -26,8 +28,8 @@ const Question = styled(AccordionItemButton)`
   align-items: center;
   justify-content: space-between;
   padding: 2.5rem;
-  font-size: 2rem;
-  color: var(--text-highlight);
+  font-size: 2.2rem;
+  color: var(--primary);
   font-weight: 500;
   cursor: pointer;
   user-select: none;
@@ -35,14 +37,25 @@ const Question = styled(AccordionItemButton)`
 `;
 
 const AnswerContainer = styled(AccordionItemPanel)`
-  padding: 2.5rem;
-  font-size: 1.6rem;
+  padding: 0rem 2.5rem 2.5rem 2.5rem;
+  font-size: 1.8rem;
   line-height: 1.8;
-  color: var(--white);
+  color: var(--text);
   font-weight: 600;
   border-radius: 0 0 0.5rem 0.5rem;
-  background-color: var(--primary);
+  background-color: var(--tooltipBackground);
+  animation: fadein 0.35s ease-in;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+  @keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 `;
 
 const StyledSvg = styled(FontAwesomeIcon)`
@@ -58,21 +71,13 @@ const QuestionItem = ({ question, answer }) => {
         <Question>
           {question}
           <AccordionItemState>
-            {({ expanded }) =>
-              expanded ? (
-                <StyledSvg
-                  icon={faAngleDown}
-                  size="1x"
-                  expanded={expanded ? 1 : 0}
-                />
-              ) : (
-                <StyledSvg
-                  icon={faAngleDown}
-                  size="1x"
-                  expanded={expanded ? 1 : 0}
-                />
-              )
-            }
+            {({ expanded }) => (
+              <StyledSvg
+                icon={faAngleDown}
+                size="1x"
+                expanded={expanded ? 1 : 0}
+              />
+            )}
           </AccordionItemState>
         </Question>
       </AccordionItemHeading>

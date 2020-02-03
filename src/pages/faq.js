@@ -45,6 +45,16 @@ const StyledInput = styled.input`
   }
 `;
 
+const NoMatches = styled.p`
+  color: var(--text-highlight);
+  border: none;
+  background-color: transparent;
+  font-weight: 600;
+  padding: 1.5rem 2rem;
+  font-size: 1.7rem;
+  transition: color 0.2s ease-in-out;
+`;
+
 const Faq = () => {
   // GRAPHQL Query
   const { questionsContent } = useStaticQuery(graphql`
@@ -69,7 +79,14 @@ const Faq = () => {
 
   const [search, setSearch] = useState('');
 
-  console.log(questionsContent);
+  const filteredQuestions = questionsContent.childMarkdownRemark.frontmatter.questions.filter(
+    ({ question, answer }) => {
+      return (
+        question.toLowerCase().includes(search.toLowerCase()) ||
+        answer.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+  );
 
   return (
     <StyledSection>
@@ -87,16 +104,13 @@ const Faq = () => {
         <FontAwesomeIcon color="var(--primary)" icon={faSearch} size="2x" />
       </InputWrapper>
       <StyledAccordion allowMultipleExpanded={true} allowZeroExpanded={true}>
-        {questionsContent.childMarkdownRemark.frontmatter.questions
-          .filter(({ question, answer }) => {
-            return (
-              question.toLowerCase().includes(search.toLowerCase()) ||
-              answer.toLowerCase().includes(search.toLowerCase())
-            );
-          })
-          .map(({ question, answer }) => (
+        {filteredQuestions.length === 0 ? (
+          <NoMatches>There are no questions matching your search.</NoMatches>
+        ) : (
+          filteredQuestions.map(({ question, answer }) => (
             <QuestionItem key={question} question={question} answer={answer} />
-          ))}
+          ))
+        )}
       </StyledAccordion>
     </StyledSection>
   );

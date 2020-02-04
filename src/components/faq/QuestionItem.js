@@ -8,7 +8,6 @@ import {
 } from 'react-accessible-accordion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
-
 import styled from 'styled-components';
 
 const StyledAccordionItem = styled(AccordionItem)`
@@ -37,7 +36,7 @@ const Question = styled(AccordionItemButton)`
 
 const AnswerContainer = styled(AccordionItemPanel)`
   padding: 0rem 2.5rem 2.5rem 2.5rem;
-  font-size: 1.8rem;
+  font-size: 1.7rem;
   line-height: 1.8;
   color: var(--text);
   font-weight: 600;

@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { Accordion } from 'react-accessible-accordion';
 import styled from 'styled-components';
-
-import QuestionItem from '../components/faq/QuestionItem';
-import { StyledSection } from '../layouts/elements';
-import Heading from '../components/UI/heading';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
+import QuestionItem from '../components/faq/QuestionItem';
+import Heading from '../components/UI/heading';
+import { StyledSection } from '../layouts/elements';
 
 const StyledAccordion = styled(Accordion)`
   width: 100%;
@@ -49,9 +48,9 @@ const NoMatches = styled.p`
   color: var(--text-highlight);
   border: none;
   background-color: transparent;
-  font-weight: 600;
+  font-weight: 500;
   padding: 1.5rem 2rem;
-  font-size: 1.7rem;
+  font-size: 1.8rem;
   transition: color 0.2s ease-in-out;
 `;
 
@@ -92,7 +91,7 @@ const Faq = () => {
     <StyledSection>
       <Heading
         title="FAQ"
-        subtitle="Here you'll find both my <span>work</span> and <span>home</span> setup <span>details</span>..."
+        subtitle="The <span>answers</span> to all your <span>questions</span> are probably here..."
       />
       <InputWrapper>
         <StyledInput

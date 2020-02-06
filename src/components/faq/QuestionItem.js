@@ -26,9 +26,9 @@ const Question = styled(AccordionItemButton)`
   align-items: center;
   justify-content: space-between;
   padding: 2.5rem;
-  font-size: 2.2rem;
-  color: var(--primary);
-  font-weight: 500;
+  font-size: 2rem;
+  color: var(--color-highlight);
+  font-weight: 600;
   cursor: pointer;
   user-select: none;
   transition: color 0.2s ease-in-out;
@@ -39,7 +39,7 @@ const AnswerContainer = styled(AccordionItemPanel)`
   font-size: 1.7rem;
   line-height: 1.8;
   color: var(--text);
-  font-weight: 600;
+  font-weight: 400;
   border-radius: 0 0 0.5rem 0.5rem;
   background-color: var(--tooltipBackground);
   animation: fadein 0.35s ease-in;

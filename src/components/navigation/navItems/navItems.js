@@ -8,6 +8,7 @@ const LINKS = [
   { name: 'Setup', to: '/' },
   { name: 'FAQ', to: '/faq' },
   { name: 'Recommendations', to: '/recommendations' },
+  { name: 'Uses', to: '/uses' }
 ];
 
 const StyledNav = styled.nav`
@@ -34,8 +35,8 @@ const NavItems = ({ mobile, clicked }) => {
       opacity: 0,
       transform: 'translateY(20px)',
       display: 'flex',
-      cursor: 'pointer',
-    },
+      cursor: 'pointer'
+    }
   });
 
   return (

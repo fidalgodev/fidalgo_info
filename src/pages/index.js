@@ -5,7 +5,6 @@ import SetupDetails from '../components/setupDetails/SetupDetails';
 
 import { StyledSection } from '../layouts/elements';
 import Heading from '../components/UI/heading';
-import BackgroundHeading from '../components/UI/backgroundHeading';
 
 const IndexPage = () => {
   // GRAPHQL Query
@@ -63,9 +62,9 @@ const IndexPage = () => {
         title="setup"
         subtitle="Here you'll find both my <span>work</span> and <span>home</span> setup <span>details</span>..."
       />
-      <BackgroundHeading>Home Setup</BackgroundHeading>
+      <h3>Home Setup</h3>
       <SetupDetails image={homeSetup} items={homeItems} />
-      <BackgroundHeading>Work Setup</BackgroundHeading>
+      <h3>Work Setup</h3>
       <SetupDetails image={homeSetup} items={workItems} />
     </StyledSection>
   );

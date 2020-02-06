@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-import BackgroundHeading from '../UI/backgroundHeading';
-
 const StyledSvg = styled(FontAwesomeIcon)`
   color: var(--primary);
   margin-left: 1rem;
@@ -12,7 +10,7 @@ const StyledSvg = styled(FontAwesomeIcon)`
   transition: transform 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
 `;
 
-const StyledResource = styled.a`
+const ResourceLink = styled.a`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,13 +38,13 @@ const ResourcesWrapper = styled.section`
 const RecomendationBlock = ({ title, children }) => {
   return (
     <>
-      <BackgroundHeading>{title}</BackgroundHeading>
+      <h3>{title}</h3>
       <ResourcesWrapper>
         {children.map(({ title, link }) => (
-          <StyledResource key={title} href={link}>
+          <ResourceLink key={title} target="_blank" href={link}>
             {title}
             <StyledSvg icon={faAngleRight} size="1x" />
-          </StyledResource>
+          </ResourceLink>
         ))}
       </ResourcesWrapper>
     </>

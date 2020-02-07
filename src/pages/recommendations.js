@@ -24,15 +24,6 @@ const Recommendations = () => {
       ) {
         childMarkdownRemark {
           html
-          frontmatter {
-            recommendations {
-              name
-              resources {
-                title
-                link
-              }
-            }
-          }
         }
       }
     }

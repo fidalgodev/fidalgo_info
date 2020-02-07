@@ -1,10 +1,16 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import Heading from '../components/UI/heading';
+import styled from 'styled-components';
 
 import { StyledSection } from '../layouts/elements';
 import SEO from '../components/utils/seo';
-import RecommendationBlock from '../components/recommendations/RecomendationBlock';
+
+const ContentSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Recommendations = () => {
   // GRAPHQL Query
@@ -17,6 +23,7 @@ const Recommendations = () => {
         name: { eq: "recommendations" }
       ) {
         childMarkdownRemark {
+          html
           frontmatter {
             recommendations {
               name
@@ -42,13 +49,11 @@ const Recommendations = () => {
         title="Recommendations"
         subtitle="You'll find different <span>resources</span> that I've used and recommend..."
       />
-      {recommendationsContent.childMarkdownRemark.frontmatter.recommendations.map(
-        ({ name, resources }) => (
-          <RecommendationBlock key={name} title={name}>
-            {resources}
-          </RecommendationBlock>
-        )
-      )}
+      <ContentSection
+        dangerouslySetInnerHTML={{
+          __html: recommendationsContent.childMarkdownRemark.html
+        }}
+      />
     </StyledSection>
   );
 };

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { useStaticQuery, graphql } from 'gatsby';
 
-const SEO = ({ meta, lang, title }) => {
+const SEO = ({ meta, lang, title, description, slug = '' }) => {
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -23,64 +23,73 @@ const SEO = ({ meta, lang, title }) => {
     `
   );
 
-  const metaDescription = site.siteMetadata.description;
-  const metaImage = `${site.siteMetadata.siteUrl}/${
-    site.siteMetadata.imageShare
-  }`;
+  const { siteMetadata } = site;
+  const metaDescription = description || siteMetadata.description;
+  const url = `${siteMetadata.siteUrl}${slug}`;
+  const metaImage = `${siteMetadata.siteUrl}/${siteMetadata.imageShare}`;
+
+  console.log(url);
 
   return (
     <Helmet
       htmlAttributes={{
-        lang,
+        lang
       }}
-      title={title || site.siteMetadata.title}
+      {...(title
+        ? {
+            titleTemplate: `%s — ${siteMetadata.title}`,
+            title
+          }
+        : {
+            title: `${siteMetadata.title} — Setup Info, FAQ, Recommendations, Uses...`
+          })}
       meta={[
         {
           name: `description`,
-          content: metaDescription,
+          content: metaDescription
         },
         {
           property: 'og:url',
-          content: site.siteMetadata.siteUrl,
+          content: url
         },
         {
           property: `og:title`,
-          content: title,
+          content: title || siteMetadata.title
         },
         {
           property: `og:description`,
-          content: metaDescription,
+          content: metaDescription
         },
         {
           property: `og:type`,
-          content: `website`,
+          content: `website`
         },
         {
           name: `twitter:card`,
-          content: `summary`,
+          content: `summary`
         },
         {
           name: `twitter:creator`,
-          content: `@${site.siteMetadata.social.twitter}`,
+          content: `@${siteMetadata.social.twitter}`
         },
         {
           name: `twitter:title`,
-          content: title,
+          content: title || siteMetadata.title
         },
         {
           name: `twitter:description`,
-          content: metaDescription,
-        },
+          content: metaDescription
+        }
       ]
         .concat([
           {
             property: 'og:image',
-            content: metaImage,
+            content: metaImage
           },
           {
             name: 'twitter:image',
-            content: metaImage,
-          },
+            content: metaImage
+          }
         ])
         .concat(meta)}
     />
@@ -90,14 +99,14 @@ const SEO = ({ meta, lang, title }) => {
 SEO.defaultProps = {
   lang: `en`,
   meta: [],
-  description: ``,
+  description: ``
 };
 
 SEO.propTypes = {
   description: PropTypes.string,
   lang: PropTypes.string,
   meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string,
+  title: PropTypes.string
 };
 
 export default SEO;

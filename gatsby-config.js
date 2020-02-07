@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Fidalgo | Setup, FAQ, Course Recommendations and more...`,
-    description: `Here you'll find all the information about my setup, everything about me, and also resource recommendations.`,
+    title: `Fidalgo Info`,
+    description: `Here you'll find all the information about my setup, about me and also resource recommendations.`,
     author: `Fidalgo`,
-    siteUrl: 'https://fidalgodev.com',
+    siteUrl: 'https://info.fidalgo.dev',
     social: {
       twitter: 'fidalgodev',
       instagram: 'fidalgodev',

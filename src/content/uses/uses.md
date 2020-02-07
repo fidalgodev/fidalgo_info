@@ -8,7 +8,7 @@
 
 #### Work setup
 
-- Macbook Pro 2019 w/ 2.6 GHz 6-Core i7, 16 GB DDR4, Radeon Pro 555X 4 GB and 256GG SSD
+- Macbook Pro 2019 w/ 2.6 GHz 6-Core i7, 16 GB DDR4, Radeon Pro 555X 4 GB and 256GB SSD
 - 2 x Dell U2419H
 - Twelvesouth StayGo USB-C Hub
 - Twelesouth Curve Stand
@@ -20,7 +20,7 @@
 
 #### Home Setup
 
-- Macbook Pro 2019 w/ 2.6 GHz 6-Core i7, 16 GB DDR4, Radeon Pro 555X 4 GB and 256GG SSD
+- Macbook Pro 2019 w/ 2.6 GHz 6-Core i7, 16 GB DDR4, Radeon Pro 555X 4 GB and 256GB SSD
 
 ### Miscellaneous
 
@@ -29,3 +29,4 @@
 - Apple Air Pods Pro
 - Bose QC35 II
 - Aer Tech Pack
+  pdwddadaw

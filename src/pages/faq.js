@@ -7,6 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import QuestionItem from '../components/faq/QuestionItem';
 import Heading from '../components/UI/heading';
+import SEO from '../components/utils/seo';
 import { StyledSection } from '../layouts/elements';
 
 const StyledAccordion = styled(Accordion)`
@@ -89,6 +90,11 @@ const Faq = () => {
 
   return (
     <StyledSection>
+      <SEO
+        title="FAQ"
+        slug="/faq"
+        description="The answers to all your questions are probably here..."
+      />
       <Heading
         title="FAQ"
         subtitle="The <span>answers</span> to all your <span>questions</span> are probably here..."

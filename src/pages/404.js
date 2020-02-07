@@ -4,6 +4,7 @@ import { Link } from 'gatsby';
 
 import { StyledSection } from '../layouts/elements';
 import Heading from '../components/UI/heading';
+import SEO from '../components/utils/seo';
 import NotFoundSVG from '../images/not_found.svg';
 
 const StyledLink = styled(Link)`
@@ -52,6 +53,7 @@ const Svg = styled.img`
 
 const NotFoundPage = () => (
   <StyledSection fullHeight={true} center>
+    <SEO title="Not found" slug="/404" />
     <Heading
       title="Page not found"
       subtitle="<span>Uppps!</span> This page <span>doesn't</span> exist"

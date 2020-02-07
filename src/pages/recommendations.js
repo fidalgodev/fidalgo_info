@@ -3,6 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby';
 import Heading from '../components/UI/heading';
 
 import { StyledSection } from '../layouts/elements';
+import SEO from '../components/utils/seo';
 import RecommendationBlock from '../components/recommendations/RecomendationBlock';
 
 const Recommendations = () => {
@@ -32,6 +33,11 @@ const Recommendations = () => {
 
   return (
     <StyledSection>
+      <SEO
+        title="Recommendations"
+        slug="/recommendations"
+        description="You'll find different resources that I've used and recommend..."
+      />
       <Heading
         title="Recommendations"
         subtitle="You'll find different <span>resources</span> that I've used and recommend..."

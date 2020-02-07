@@ -12,7 +12,7 @@ const IndexPage = () => {
     query {
       homeSetup: file(relativePath: { eq: "setup_home.jpg" }) {
         childImageSharp {
-          fluid(maxWidth: 2000, quality: 95) {
+          fluid(maxWidth: 2500, quality: 95) {
             ...GatsbyImageSharpFluid_tracedSVG
           }
         }

@@ -1,8 +1,8 @@
 ### Editor + Terminal
 
-- [Visual Studio Code](http://www.google.com) is my editor of choice.
-- I use [Hyper JS](http://www.google.com) as my terminal + [Oh my zsh](http://www.google.com) as my Bash. I then have [Pure prompt]() running with ZSH. You can find all my _dot files_ [here]().
-- On my editor and terminal I use the [Dank Mono]() font.
+- [Visual Studio Code](https://code.visualstudio.com) is my editor of choice.
+- I use [Hyper JS](https://hyper.is) as my terminal + [Oh my zsh](https://ohmyz.sh) as my Bash. I then have [Pure prompt](https://github.com/sindresorhus/pur) running with ZSH. You can find all my _dot files_ [here](https://github.com/fidalgodev/configfiles).
+- On my editor and terminal I use the [Dank Mono](https://dank.sh) font.
 
 ### Hardware
 

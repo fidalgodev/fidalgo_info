@@ -103,7 +103,7 @@ export default createGlobalStyle`
     z-index: 1;
     position: relative;
     font-style: italic;
-        margin: 0;
+    margin: 0;
     margin-bottom: 2.5rem;
     color: var(--white);
     transition: color 0.2s ease-out;

@@ -28,8 +28,8 @@ export const Indicator = styled.button`
   justify-content: center;
   align-items: center;
   padding: 0;
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2rem;
   border-radius: 100%;
   background-color: var(--background);
   border: none;

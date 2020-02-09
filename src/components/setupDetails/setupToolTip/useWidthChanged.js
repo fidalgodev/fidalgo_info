@@ -1,14 +1,19 @@
 import { useState, useEffect } from 'react';
 
 function useWidthChanged() {
-  const [width, setWidth] = useState(window && window.innerWidth);
+  const [width, setWidth] = useState(
+    typeof window !== 'undefined' && window.innerWidth
+  );
 
-  const handleResize = () => setWidth(window && window.innerWidth);
+  const handleResize = () =>
+    setWidth(typeof window !== 'undefined' && window.innerWidth);
 
   useEffect(() => {
-    window && window.addEventListener('resize', handleResize);
+    typeof window !== 'undefined' &&
+      window.addEventListener('resize', handleResize);
     return () => {
-      window && window.removeEventListener('resize', handleResize);
+      typeof window !== 'undefined' &&
+        window.removeEventListener('resize', handleResize);
     };
   }, []);
 

@@ -38,8 +38,12 @@ export const Indicator = styled.button`
   transition: background-color 200ms cubic-bezier(0.645, 0.045, 0.355, 1);
 
   @media ${props => props.theme.mediaQueries.small} {
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+
+    & svg {
+      width: 0.75rem !important;
+    }
   }
 `;
 

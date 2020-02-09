@@ -26,8 +26,8 @@ const Question = styled(AccordionItemButton)`
   align-items: center;
   justify-content: space-between;
   padding: 2.5rem;
-  font-size: 2rem;
-  color: var(--color-highlight);
+  font-size: 1.8rem;
+  color: var(--text-highlight);
   font-weight: 600;
   cursor: pointer;
   user-select: none;
@@ -44,6 +44,10 @@ const AnswerContainer = styled(AccordionItemPanel)`
   background-color: var(--tooltipBackground);
   animation: fadein 0.35s ease-in;
   transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+  & a {
+    color: var(--primary);
+  }
 
   @keyframes fadein {
     0% {
@@ -80,7 +84,7 @@ const QuestionItem = ({ question, answer }) => {
         </Question>
       </AccordionItemHeading>
       <AnswerContainer>
-        <p>{answer}</p>
+        <p dangerouslySetInnerHTML={{ __html: answer }}></p>
       </AnswerContainer>
     </StyledAccordionItem>
   );

@@ -114,7 +114,7 @@ export default createGlobalStyle`
 
     @media ${props => props.theme.mediaQueries.smallest} {
       font-size: 1.8rem;
-      margin-bottom: 1rem;
+      /* margin-bottom: 1rem; */
     }
 
     &:not(:first-child) {

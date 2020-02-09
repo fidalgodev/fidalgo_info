@@ -28,8 +28,6 @@ const SEO = ({ meta, lang, title, description, slug = '' }) => {
   const url = `${siteMetadata.siteUrl}${slug}`;
   const metaImage = `${siteMetadata.siteUrl}/${siteMetadata.imageShare}`;
 
-  console.log(url);
-
   return (
     <Helmet
       htmlAttributes={{

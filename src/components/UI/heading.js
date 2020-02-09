@@ -6,11 +6,11 @@ const HeadingWrapper = styled.div`
   margin-bottom: 7rem;
 
   @media ${props => props.theme.mediaQueries.medium} {
-    margin-bottom: 5rem;
+    margin-bottom: 3.5rem;
   }
 
   @media ${props => props.theme.mediaQueries.small} {
-    margin-bottom: 4.5rem;
+    margin-bottom: 3rem;
   }
 `;
 

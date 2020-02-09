@@ -4,4 +4,4 @@
 https://www.info.fidalgo.dev/* https://info.fidalgo.dev/:splat 301!
 
 # Optional: Redirect default Netlify subdomain to primary domain
-https://happy-bassi-69e3b4.netlify.com/* https://info.fidalgo.dev/:splat 301!
+https://fidalgo-info.netlify.com/* https://info.fidalgo.dev/:splat 301!

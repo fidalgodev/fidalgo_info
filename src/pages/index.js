@@ -64,8 +64,8 @@ const IndexPage = () => {
       />
       <h3>Home Setup</h3>
       <SetupDetails image={homeSetup} items={homeItems} />
-      <h3>Work Setup</h3>
-      <SetupDetails image={homeSetup} items={workItems} />
+      {/* <h3>Work Setup</h3>
+      <SetupDetails image={homeSetup} items={workItems} /> */}
     </StyledSection>
   );
 };

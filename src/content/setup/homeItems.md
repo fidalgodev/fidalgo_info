@@ -24,7 +24,7 @@ items:
     },
     {
       name: 'Lifx Tiles',
-      description: "This tiles are amazing, specially at night. Gives me that soft light so I can get into the zone. They're also RGB and you can controll them with your phone and Voice Assistant of choice.",
+      description: "These tiles are amazing, especially at night. It gives me that soft light so I can get into the zone. They're also RGB and you can control them with your phone and Voice Assistant of choice.",
       link: 'https://www.amazon.co.uk/LIFX-Suitable-indoor-White-lighting/dp/B07543MM1Y',
       top: '10',
       left: '90',
@@ -59,7 +59,7 @@ items:
     },
     {
       name: 'Caldigit TS3 Plus',
-      description: "I absolutly live this device. It's a bit pricy, but in my opinion is the best Thunderbolt dock out there. It powers my laptop with 85W of power, and I connect every single device to it. Then only 1 thunderbolt cable plugs into my laptop.",
+      description: "I love this device. It's a bit pricy, but in my opinion, is the best Thunderbolt dock out there. It powers my laptop with 85W of power, and I connect every single device to it. Then only 1 thunderbolt cable plugs into my laptop.",
       link: 'https://www.amazon.co.uk/CalDigit-TS3-Plus-Thunderbolt-Dock-Space-Grey/dp/B07CVMV8VC/ref=sr_1_2?keywords=ts3+plus&qid=1581264607&sr=8-2',
       top: '38',
       left: '35',

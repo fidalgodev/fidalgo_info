@@ -73,8 +73,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Fidalgo | Front-end Developer`,
-        short_name: `Fidalgo`,
+        name: `Fidalgo Info`,
+        short_name: `Fidalgo Info`,
         icon: `src/images/icon.png`,
         start_url: `/`,
         background_color: `#212121`,

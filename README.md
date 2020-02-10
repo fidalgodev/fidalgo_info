@@ -1,7 +1,9 @@
-# Personal Portfolio Website
+# Info Website
 
-## [Check it live here](https://fidalgodev.com/)
+## [Check it live here](https://info.fidalgodev.com/)
 
 ![Thumbnail](thumbnail.png)
 
-Personal portfolio created with Gatbsy.
+### Here you'll find everything about my Setup, Uses, Recommendations, and a lot more...
+
+Made with ❤️ by Fidalgo

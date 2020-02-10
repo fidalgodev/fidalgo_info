@@ -35,7 +35,7 @@ const Question = styled(AccordionItemButton)`
 `;
 
 const AnswerContainer = styled(AccordionItemPanel)`
-  padding: 0rem 2.5rem 2.5rem 2.5rem;
+  padding: 2.5rem;
   font-size: 1.7rem;
   line-height: 1.8;
   color: var(--text);

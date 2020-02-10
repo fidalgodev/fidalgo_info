@@ -21,6 +21,7 @@ export default createGlobalStyle`
 
   * {
     outline-color: var(--primary);
+    outline-width: 1px;
     box-sizing: inherit;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
   }

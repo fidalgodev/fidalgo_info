@@ -1,8 +1,27 @@
 ### Editor + Terminal
 
 - [Visual Studio Code](https://code.visualstudio.com) is my editor of choice.
-- I use [Hyper JS](https://hyper.is) as my terminal + [Oh my zsh](https://ohmyz.sh) as my Bash. I then have [Pure prompt](https://github.com/sindresorhus/pur) running with ZSH. You can find all my _dot files_ [here](https://github.com/fidalgodev/configfiles).
+- I use [Hyper JS](https://hyper.is) as my terminal + [Oh my zsh](https://ohmyz.sh) as my Bash. I then have [Pure prompt](https://github.com/sindresorhus/pur) running with ZSH.
+- You can find all my _dot files_ [here](https://github.com/fidalgodev/configfiles). This includes the theme I use and all my VS Code settings.
 - On my editor and terminal I use the [Dank Mono](https://dank.sh) font.
+
+#### VS Code Extensions
+
+- Auto Close Tag
+- Auto Rename Tag
+- Bracket Pair Colorizer
+- Color Highlight
+- Docker
+- DotENV
+- ES7 React/Redux/GraphQL/React-Native snippets
+- ESLint
+- Git Lens
+- Import Cost
+- npm Intellisense
+- One Dark Pro
+- Path Intellisense
+- Prettier
+- Visual Studio Intellicode
 
 ### Hardware
 
@@ -34,6 +53,7 @@
 - Nomad Leather Mousepad
 - Nomad Wireless HUB
 - Herman Miller Aeron
+- Harber London Leather Mousepad XL
 
 ### Miscellaneous
 

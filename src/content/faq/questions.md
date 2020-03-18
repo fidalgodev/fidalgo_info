@@ -62,5 +62,9 @@ questions:
       question: 'Should I learn Vanilla JS before React/Vue/Angular?',
       answer: "Absolutely! Don't jump into a framework/library before learning Vanilla JS first. You'll only get frustrated and not understand what's going on.",
     },
+    {
+      question: 'Where can I find your VS Code settings, extensions, etc?',
+      answer: "Go to my <a href='/uses'>Uses</a> page.",
+    },
   ]
 ---

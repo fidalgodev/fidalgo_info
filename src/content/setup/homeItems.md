@@ -164,7 +164,7 @@ items:
     },
     {
       name: 'Fully Jarvis Bamboo',
-      description: "Absolutely love my standing desk. It's super stable and well built. And I love the Bamboo countertop.",
+      description: "Absolutely love my standing desk. It's super stable and well built. And I love the Bamboo countertop. The size is 180x80CM.",
       link: 'https://www.fully.com/en-eu/standing-desks/jarvis-adjustable-height-desk-bamboo.html',
       top: '64',
       left: '8',

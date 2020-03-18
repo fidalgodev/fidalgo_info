@@ -8,7 +8,7 @@ import Heading from '../components/UI/heading';
 
 const IndexPage = () => {
   // GRAPHQL Query
-  const { homeSetup, homeItems, workItems } = useStaticQuery(graphql`
+  const { homeSetup, homeItems, workSetup, workItems } = useStaticQuery(graphql`
     query {
       homeSetup: file(relativePath: { eq: "setup_home.jpg" }) {
         childImageSharp {
@@ -32,6 +32,13 @@ const IndexPage = () => {
               top
               left
             }
+          }
+        }
+      }
+      workSetup: file(relativePath: { eq: "setup_work.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 2500, quality: 95) {
+            ...GatsbyImageSharpFluid_tracedSVG
           }
         }
       }
@@ -64,8 +71,8 @@ const IndexPage = () => {
       />
       <h3>Home Setup</h3>
       <SetupDetails image={homeSetup} items={homeItems} />
-      {/* <h3>Work Setup</h3>
-      <SetupDetails image={homeSetup} items={workItems} /> */}
+      <h3>Work Setup</h3>
+      <SetupDetails image={workSetup} items={workItems} />
     </StyledSection>
   );
 };

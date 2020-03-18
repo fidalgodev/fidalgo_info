@@ -1,6 +1,6 @@
 # Info Website
 
-## [Check it live here](https://info.fidalgodev.com/)
+## [Check it live here](https://info.fidalgo.dev)
 
 ![Thumbnail](thumbnail.png)
 

@@ -5,7 +5,7 @@
 - You can find all my _dot files_ [here](https://github.com/fidalgodev/configfiles). This includes the theme I use and all my VS Code settings.
 - On my editor and terminal I use the [Dank Mono](https://dank.sh) font.
 
-#### VS Code Extensions
+### VS Code Extensions
 
 - Auto Close Tag
 - Auto Rename Tag
